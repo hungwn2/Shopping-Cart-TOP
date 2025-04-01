@@ -32,8 +32,7 @@ export default function Shop(props){
                         <Item
                         key={Item.sku}
                         artwork={item.image}
-                        purpose={Item.purpose}
-                        creator={Item.creator}
+                       
                         price={Item.price}
                         add={Item.add}
                         id={Item.id}

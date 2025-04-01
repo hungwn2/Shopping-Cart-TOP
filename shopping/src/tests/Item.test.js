@@ -8,18 +8,14 @@ describe('Item tests', ()=>{
     it('matches snapshot', ()=>{
 
         const {asFragment}=render(
-        <Item price="2000" purpose="car" creator="Adel Chinoy"/>
+        <Item price="2000" />
         );
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it ("renders purpose name", ()=>{
-        render(<Item price="2000" purpose="Bread board" creator="Benjamin Ngo"/>);
-        expect(screen.getByText('Bread board')).toBeinTheDocument();
-    });
 
     it ('button redners correct text from initial state', ()=>{
-        render (<Item price="2000" purpose="STM32" creator="Caleb"/>);    
+        render (<Item price="2000" description="Awesome item" name="Test Item"/>);    
         const addBtn=screen.getByRole('button', {name:'Add to cart'});
         expect(addBtn).toHaveTextContent('Add to cart');
         });
@@ -28,8 +24,7 @@ describe('Item tests', ()=>{
         render(
             <Item
             price="2000"
-            purpose="Pins"
-            creator="Carmelli Dao"
+           
             add={jest.fn()}
             />
         );
@@ -43,8 +38,7 @@ describe('Item tests', ()=>{
         render(
             <Item
             price="2000"
-            purpose="Pins"
-            creator="Carmelli Dao"
+           
             add={jest.fn()}
             />
         );
@@ -57,23 +51,21 @@ describe('Item tests', ()=>{
         render(
             <Item
             price="2000"
-            purpose="Pins"
-            creator="Carmelli Dao"
+         
             add={jest.fn()}
             />
         );
         const decrementBtn=screen.getByRole('button', {name:'-' });
         const quantity=screen.getByTestId('quantity');
-        userEvent.click(incrementBtn);
-        expect(quanityt).toHaveTextContent('1');
+        userEvent.click(decrementBtn);
+        expect(quantity).toHaveTextContent('1');
     });
 
     it ('decrement btn decr quantity', async()=>{
         render(
             <Item
             price="2000"
-            purpose="Pins"
-            creator="Carmelli Dao"
+            
             add={jest.fn()}
             />
         );

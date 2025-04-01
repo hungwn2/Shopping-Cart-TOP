@@ -22,8 +22,6 @@ export default function Cart(props) {
               key={item.sku}
               sku={item.sku}
               image={item.image}
-              creator={item.creator}
-              purpose={item.purpose}
               quantity={item.quantity}
               price={item.price}
               remove={props.remove}

@@ -1,26 +1,24 @@
-import '../styles/cartItem.css';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import '../styles/cartitem.css'; // Create a cartitem.css file for styling if needed
 
-export default function CartItem(props) {
-    const path=props.artwork;
-    const totalPrice=
-    Math.round((props.price*props.quantity+Number.EPSILON)*100)/100;
-    return(
-        <div className="cart-item">
-            <img src={path} alt="Thing image"></img>
-            <div className="details">
-                <div>{props.creator}</div>
-                <div>{props.date}</div>
-            </div>
-            <div className="quantity">Quantity: {props.quantity}</div>
-            <div>${props.price} each</div>
-            <div className="total-price"> ${totalPrice} total</div>
-        <button onclick={()=>{
-            console.log(props.sku);
-            props.remove(props.sku);
-        }}
-        >
-            <i className="fa-solid fa-trash-can"></i>
-        </button>
-        </div>
-    );
-}
+const CartItem = ({ items }) => {
+  const { sku } = useParams(); // Get the SKU from the URL parameter
+  const item = items.find((item) => item.sku === sku); // Find the item in the data array
+
+  if (!item) {
+    return <div>Item not found</div>; // Handle the case where the item is not found
+  }
+
+  return (
+    <div className="cart-item-container">
+      <h1>{item.name}</h1>
+      <img src={item.imageUrl} alt={item.name} />
+      <p>Price: ${item.price}</p>
+      <p>{item.description}</p>
+      {/* Add other item details as needed */}
+    </div>
+  );
+};
+
+export default CartItem;
